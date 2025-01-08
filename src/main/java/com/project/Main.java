@@ -2,13 +2,18 @@ package com.project;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Collection;
 
 import com.project.dao.Manager;
-import com.project.domain.*;
+import com.project.domain.Autor;
+import com.project.domain.Biblioteca;
+import com.project.domain.Exemplar;
+import com.project.domain.Llibre;
+import com.project.domain.Persona;
+import com.project.domain.Prestec;
 
 public class Main {
 
@@ -37,13 +42,14 @@ public class Main {
         Autor autorOrwell = Manager.addAutor("George Orwell");
         Autor autorWoolf = Manager.addAutor("Virginia Woolf");
 
-        /*
+        
         // Comprovem que s'han creat els autors
         @SuppressWarnings("unchecked")
         Collection<Autor> autors = (Collection<Autor>) Manager.listCollection(Autor.class);
         System.out.println("Autors creats:");
         System.out.println(Manager.collectionToString(Autor.class, autors));
 
+        
         // 4. Creem els llibres
         System.out.println("\n=== Creant llibres ===");
         Llibre llibre100 = Manager.addLlibre(
@@ -62,6 +68,7 @@ public class Main {
         System.out.println("Llibres creats:");
         System.out.println(Manager.collectionToString(Llibre.class, llibres));
 
+        
         // 5. Assignem autors als llibres
         System.out.println("\n=== Vinculant autors amb llibres ===");
         Set<Llibre> llibresGarcia = new HashSet<>();
@@ -165,7 +172,7 @@ public class Main {
         System.out.println("\nConsulta 3: Llibres i les seves biblioteques");
         List<Object[]> llibresBiblios = Manager.findLlibresAmbBiblioteques();
         System.out.println(Manager.formatMultipleResult(llibresBiblios));
-        */
+        
 
         // 11. Tanquem la connexió
         System.out.println("\n=== Finalitzant el programa ===");

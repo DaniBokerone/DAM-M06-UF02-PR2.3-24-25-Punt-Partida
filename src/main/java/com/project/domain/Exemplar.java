@@ -1,14 +1,103 @@
 package com.project.domain;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "exemplars")
 public class Exemplar implements Serializable {
-    /*
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="exemplarId", unique=true, nullable=false) 
+    private long exemplarId;
+
+    @Column(unique = true, nullable = false)
+    private String codiBarres;
+
+    @ManyToOne
+    @JoinColumn(name = "llibreId", nullable = false)
+    private Llibre llibre;
+
+    @ManyToOne
+    @JoinColumn(name = "bibliotecaId", nullable = false)
+    private Biblioteca biblioteca;
+
+    private boolean disponible;
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "exemplar", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Prestec> historialPrestecs = new ArrayList<>();
+
+    public Exemplar() {}
+
+    public Exemplar(String codiBarres, Llibre llibre, Biblioteca biblioteca) {
+        this.codiBarres = codiBarres;
+        this.llibre = llibre;
+        this.biblioteca = biblioteca;
+    }
+
+
+    public long getExemplarId() {
+        return exemplarId;
+    }
+
+    public void setExemplarId(long exemplarId) {
+        this.exemplarId = exemplarId;
+    }
+
+    public String getCodiBarres() {
+        return codiBarres;
+    }
+
+    public void setCodiBarres(String codiBarres) {
+        this.codiBarres = codiBarres;
+    }
+
+    public Llibre getLlibre() {
+        return llibre;
+    }
+
+    public void setLlibre(Llibre llibre) {
+        this.llibre = llibre;
+    }
+
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public List<Prestec> getHistorialPrestecs() {
+        return historialPrestecs;
+    }
+
+    public void setHistorialPrestecs(List<Prestec> historialPrestecs) {
+        this.historialPrestecs = historialPrestecs;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -47,5 +136,4 @@ public class Exemplar implements Serializable {
     public int hashCode() {
         return Long.hashCode(exemplarId);
     }
-    */
 }
